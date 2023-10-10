@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="open pokemon booster packs with this free online simulator. featuring packs from old sets, base set to ex series.">
+	
+	<title>Pokemon Booster Pack Simulator</title>
+	
+	<link rel="icon" type="image/x-icon" href="pokeball_icon2.png">
+<link type="text/css" rel="stylesheet" href="style2.css">
+
+    <!-- jQuery link -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>    
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VEW7XRW21W"></script>
+
+<script>
+	window.dataLayer=window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-VEW7XRW21W');
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2030115096393972"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body onload="newPack()">
+
+<!-- zoom onto cards -->
+<div id="myModal" class="modal">
+
+    <img draggable="false" class="modal-content" id="modalImg">
+</div>
+
+<div class="top-buttons" style="margin:5vmin">
+	<br>
+	<button id="button1" onclick="resetAll();setTimeout(randomPack, 501)">RANDOM PACK</button>
+	<div class="dropdown">
+		<button id="button2">CHOOSE SET</button>
+			<div class="dropdown-content">
+				<a onclick="checkAll()">Check all</a>
+				<a onclick="resetAll();currentSet=0;setTimeout(newPack, 501);check()"><input type="checkbox" id="check1" onclick="currentSet=0;check()" checked="true" />base set</a>
+				<a onclick="resetAll();currentSet=1;setTimeout(newPack, 501);check()"><input type="checkbox" id="check2" onclick="currentSet=1;check()" checked="true" />jungle</a>
+				<a onclick="resetAll();currentSet=2;setTimeout(newPack, 501);check()"><input type="checkbox" id="check3" onclick="currentSet=2;check()" checked="true" />fossil</a>
+				<a onclick="resetAll();currentSet=3;setTimeout(newPack, 501);check()"><input type="checkbox" id="check4" onclick="currentSet=3;check()" checked="true" />base set 2</a>
+				<a onclick="resetAll();currentSet=4;setTimeout(newPack, 501);check()"><input type="checkbox" id="check5" onclick="currentSet=4;check()" checked="true" />team rocket</a>
+				<a onclick="resetAll();currentSet=5;setTimeout(newPack, 501);check()"><input type="checkbox" id="check6" onclick="currentSet=5;check()" checked="true" />gym heroes</a>
+				<a onclick="resetAll();currentSet=6;setTimeout(newPack, 501);check()"><input type="checkbox" id="check7" onclick="currentSet=6;check()" checked="true" />gym challenge</a>
+				<a onclick="resetAll();currentSet=7;setTimeout(newPack, 501);check()"><input type="checkbox" id="check8" onclick="currentSet=7;check()" checked="true" />neo genesis</a>
+				<a onclick="resetAll();currentSet=8;setTimeout(newPack, 501);check()"><input type="checkbox" id="check9" onclick="currentSet=8;check()" checked="true" />neo discovery</a>
+				<a onclick="resetAll();currentSet=9;setTimeout(newPack, 501);check()"><input type="checkbox" id="check10" onclick="currentSet=9;check()" checked="true" />neo revelation</a>
+				<a onclick="resetAll();currentSet=10;setTimeout(newPack, 501);check()"><input type="checkbox" id="check11" onclick="currentSet=10;check()" checked="true" />neo destiny</a>
+				<a onclick="resetAll();currentSet=11;setTimeout(newPack, 501);check()"><input type="checkbox" id="check12" onclick="currentSet=11;check()" checked="true" />expedition</a>
+				<a onclick="resetAll();currentSet=12;setTimeout(newPack, 501);check()"><input type="checkbox" id="check13" onclick="currentSet=12;check()" checked="true" />aquapolis</a>
+				<a onclick="resetAll();currentSet=13;setTimeout(newPack, 501);check()"><input type="checkbox" id="check14" onclick="currentSet=13;check()" checked="true" />skyridge</a>
+				<a onclick="resetAll();currentSet=14;setTimeout(newPack, 501);check()"><input type="checkbox" id="check15" onclick="currentSet=14;check()" checked="true" />ruby and sapphire</a>
+				<a onclick="resetAll();currentSet=15;setTimeout(newPack, 501);check()"><input type="checkbox" id="check16" onclick="currentSet=15;check()" checked="true" />sandstorm</a>
+				<a onclick="resetAll();currentSet=16;setTimeout(newPack, 501);check()"><input type="checkbox" id="check17" onclick="currentSet=16;check()" checked="true" />dragon</a>
+				<a onclick="resetAll();currentSet=17;setTimeout(newPack, 501);check()"><input type="checkbox" id="check18" onclick="currentSet=17;check()" checked="true" />team magma vs team aqua</a>
+				<a onclick="resetAll();currentSet=18;setTimeout(newPack, 501);check()"><input type="checkbox" id="check19" onclick="currentSet=18;check()" checked="true" />legend maker</a>
+			</div>
+		</div>
+	<button id="button3" onclick="resetAll();setTimeout(newPack, 501)">SAME SET</button>
+	<button id="button4" onclick="flipAll()">FLIP ALL</button>
+</div>
+
+<div class="row" style="margin:5vmin">
+    <div id="myDiv" class="pack" onclick="flip0()">
+        <img draggable="false" id="rarity0" src="empty.png">
+        <div class="front">
+            <img draggable="false" id="boosterPackFront" src="1stcharizard.jpg">
+        </div>
+        <div class="back">
+            <img draggable="false" id="boosterPackBack" src="basesetback1.jpg">
+        </div>
+    </div>
+
+    <div id="myDiv1" class="card1" onclick="flip1();">
+        <img draggable="false" id="rarity1" src="rarity_common.png">
+        <div class="front1">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back1">
+            <img draggable="false" id="randomCard1" src="cardback.jpg" height="455">
+        
+        </div>
+    </div>
+
+    <div id="myDiv2" class="card2" onclick="flip2();">
+        <img draggable="false" id="rarity2" src="rarity_common.png">
+        <div class="front2">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back2">
+            <img draggable="false" id="randomCard2" src="cardback.jpg" height="455">
+        </div>
+    </div> 
+
+    <div id="myDiv3" class="card3" onclick="flip3();">
+        <img draggable="false" id="rarity3" src="rarity_common.png">
+        <div class="front3">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back3">
+            <img draggable="false" id="randomCard3" src="cardback.jpg" height="455">
+        </div>
+    </div> 
+
+    <div id="myDiv4" class="card4" onclick="flip4();">
+        <img draggable="false" id="rarity4" src="rarity_common.png">
+        <div class="front4">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back4">
+            <img draggable="false" id="randomCard4" src="cardback.jpg" height="455">
+        </div>
+    </div> 
+
+    <div id="myDiv5" class="card5" onclick="flip5();">
+        <img draggable="false" id="rarity5" src="rarity_common.png">
+        <div class="front5">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back5">
+            <img draggable="false" id="randomCard5" src="cardback.jpg" height="455">
+        </div>
+    </div>
+
+    <div id="myDiv6" class="card6" onclick="flip6();">
+        <img draggable="false" id="rarity6" src="rarity_common.png">
+        <div class="front6">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back6">
+            <img draggable="false" id="randomCard6" src="cardback.jpg" height="455">
+        </div>
+    </div>
+
+    <div id="myDiv7" class="card7" onclick="flip7();">
+        <img draggable="false" id="rarity7" src="rarity_common.png">
+        <div class="front7">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back7">
+            <img draggable="false" id="randomCard7" src="cardback.jpg" height="455">
+        </div>
+    </div>
+
+    <div id="myDiv8" class="card8" onclick="flip8();">
+        <img draggable="false" id="rarity8" src="rarity_rare.png">
+        <div class="front8">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back8">
+            <img draggable="false" id="randomCard8" src="cardback.jpg" height="455">
+        </div>
+    </div>
+
+    <div id="myDiv9" class="card9" onclick="flip9();">
+        <img draggable="false" id="rarity9" src="rarity_uncommon.png">
+        <div class="front9">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back9">
+            <img draggable="false" id="randomCard9" src="cardback.jpg" height="455">
+        </div>
+    </div>
+
+    <div id="myDiv10" class="card10" onclick="flip10();">
+        <img draggable="false" id="rarity10" src="rarity_uncommon.png">
+        <div class="front10">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back10">
+            <img draggable="false" id="randomCard10" src="cardback.jpg" height="455">
+        </div>
+    </div>
+
+    <div id="myDiv11" class="card11" onclick="flip11();">
+        <img draggable="false" id="rarity11" src="rarity_uncommon.png">
+        <div class="front11">
+            <img draggable="false" src="cardback.jpg" height="455">
+        </div>
+        <div class="back11">
+            <img draggable="false" id="randomCard11" src="cardback.jpg" height="455">
+        </div>
+    </div>
+    
+</div>
+
+<div class="bottom-buttons">
+	<button id="button1" onclick="resetAll();setTimeout(randomPack, 501)">RANDOM PACK</button>
+	<div class="dropup">
+		<button id="button2">CHOOSE SET</button>
+			<div class="dropup-content">
+				<a onclick="resetAll();currentSet=0;setTimeout(newPack, 501);check()">base set</a>
+				<a onclick="resetAll();currentSet=1;setTimeout(newPack, 501);check()">jungle</a>
+				<a onclick="resetAll();currentSet=2;setTimeout(newPack, 501);check()">fossil</a>
+				<a onclick="resetAll();currentSet=3;setTimeout(newPack, 501);check()">base set 2</a>
+				<a onclick="resetAll();currentSet=4;setTimeout(newPack, 501);check()">team rocket</a>
+				<a onclick="resetAll();currentSet=5;setTimeout(newPack, 501);check()">gym heroes</a>
+				<a onclick="resetAll();currentSet=6;setTimeout(newPack, 501);check()">gym challenge</a>
+				<a onclick="resetAll();currentSet=7;setTimeout(newPack, 501);check()">neo genesis</a>
+				<a onclick="resetAll();currentSet=8;setTimeout(newPack, 501);check()">neo discovery</a>
+				<a onclick="resetAll();currentSet=9;setTimeout(newPack, 501);check()">neo revelation</a>
+				<a onclick="resetAll();currentSet=10;setTimeout(newPack, 501);check()">neo destiny</a>
+				<a onclick="resetAll();currentSet=11;setTimeout(newPack, 501);check()">expedition</a>
+				<a onclick="resetAll();currentSet=12;setTimeout(newPack, 501);check()">aquapolis</a>
+				<a onclick="resetAll();currentSet=13;setTimeout(newPack, 501);check()">skyridge</a>
+				<a onclick="resetAll();currentSet=14;setTimeout(newPack, 501);check()">ruby and sapphire</a>
+				<a onclick="resetAll();currentSet=15;setTimeout(newPack, 501);check()">sandstorm</a>
+				<a onclick="resetAll();currentSet=16;setTimeout(newPack, 501);check()">dragon</a>
+				<a onclick="resetAll();currentSet=17;setTimeout(newPack, 501);check()">team magma vs team aqua</a>
+				<a onclick="resetAll();currentSet=18;setTimeout(newPack, 501);check()">legend maker</a>
+			</div>
+		</div>
+	<button id="button3" onclick="resetAll();setTimeout(newPack, 501)">SAME SET</button>
+	<button id="button4" onclick="flipAll()">FLIP ALL</button>
+	<a href="/about_us/"><button id="button4">ABOUT US</button></a>
+</div>
+<!-- bottom banner ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2030115096393972"
+     data-ad-slot="5513376129"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle=window.adsbygoogle || []).push({});
+</script>
+
+<script type="text/javascript" src="scriptss.js"></script> 
+
+</body>
+</html>
